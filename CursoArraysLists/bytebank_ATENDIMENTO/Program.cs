@@ -1,8 +1,34 @@
-﻿Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
+﻿using bytebank.Modelos.Conta;
+
+Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
 
 
 
-void TestaBuscarPalavras()
+void testaArrayContaCorrente()
+{
+    ContaCorrente[] listaDeContas = new ContaCorrente[]
+    {
+        new ContaCorrente(487,"5679787-A"),
+        new ContaCorrente(487,"5679787-B"),
+        new ContaCorrente(487,"5679787-C")
+    };
+
+    foreach (ContaCorrente conta in listaDeContas)
+    {
+        System.Console.WriteLine($"Conta : {conta.Conta}");
+    }
+}
+
+testaArrayContaCorrente();
+
+
+/* using bytebank.Modelos.Conta;
+
+
+
+
+
+//void TestaBuscarPalavras()
 {
     string[] palavras = new string[5];
 
@@ -49,13 +75,13 @@ void Idades()
     System.Console.WriteLine($"Média de Idade {acumulador/idades.Length}");
 }
 
-Array amostra = Array.CreateInstance(typeof(double),5);
+/* Array amostra = Array.CreateInstance(typeof(double),5);
 
 amostra.SetValue(5.9,0);
 amostra.SetValue(1.8,1);
 amostra.SetValue(7.1,2);
 amostra.SetValue(10,3);
-amostra.SetValue(6.9,4);
+amostra.SetValue(6.9,4); 
 
 void testaMediana(Array array)
 {
@@ -70,3 +96,19 @@ void testaMediana(Array array)
     double mediana = (tamanho % 2 != 0) ? numerosOrdenados[meio] :
     (numerosOrdenados[meio] +  numerosOrdenados[meio -1])/2;
 }
+
+void testaArrayContaCorrente()
+{
+    ContaCorrente[] listaDeContas = new ContaCorrente[]
+    {
+        new ContaCorrente(487,"5679787-A"),
+        new ContaCorrente(487,"5679787-B"),
+        new ContaCorrente(487,"5679787-C")
+    };
+
+    foreach (ContaCorrente conta in listaDeContas)
+    {
+        System.Console.WriteLine($"Conta : {conta.Conta}");
+    }
+}
+ */
