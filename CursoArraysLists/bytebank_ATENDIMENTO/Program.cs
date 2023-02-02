@@ -1,4 +1,5 @@
 ﻿using bytebank.Modelos.Conta;
+using bytebank.Util;
 
 Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
 
@@ -6,17 +7,23 @@ Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
 
 void testaArrayContaCorrente()
 {
-    ContaCorrente[] listaDeContas = new ContaCorrente[]
-    {
-        new ContaCorrente(487,"5679787-A"),
-        new ContaCorrente(487,"5679787-B"),
-        new ContaCorrente(487,"5679787-C")
-    };
+    listaDeContasCorrentes listaDeContas = new listaDeContasCorrentes();
+    
+    listaDeContas.Adicionar( new ContaCorrente(487,"5679787-A"));
+    listaDeContas.Adicionar( new ContaCorrente(487,"5679787-B"));
+    listaDeContas.Adicionar( new ContaCorrente(487,"5679787-C"));
+     listaDeContas.Adicionar( new ContaCorrente(487,"5679787-D"));
+    listaDeContas.Adicionar( new ContaCorrente(487,"5679787-E"));
+    listaDeContas.Adicionar( new ContaCorrente(487,"5679787-F"));
+    listaDeContas.Adicionar( new ContaCorrente(487,"5679787-G"));
+    listaDeContas.Adicionar( new ContaCorrente(487,"5679787-H"));
+    listaDeContas.Adicionar( new ContaCorrente(487,"5679787-I"));
+     listaDeContas.Adicionar( new ContaCorrente(487,"5679787-J"));
+    listaDeContas.Adicionar( new ContaCorrente(487,"5679787-L"));
+    listaDeContas.Adicionar( new ContaCorrente(487,"5679787-N"));
+    
 
-    foreach (ContaCorrente conta in listaDeContas)
-    {
-        System.Console.WriteLine($"Conta : {conta.Conta}");
-    }
+    
 }
 
 testaArrayContaCorrente();
