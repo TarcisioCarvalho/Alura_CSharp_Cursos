@@ -15,7 +15,8 @@ public class listaDeContasCorrentes
     public void Adicionar(ContaCorrente item)
     {
         verificaCapacidade(_proximaPosicao + 1);
-        System.Console.WriteLine($"Adicionando Item na Próxima Posição {_proximaPosicao}");
+        Console.WriteLine($"Adicionando Item na Próxima Posição {_proximaPosicao}");
+        Console.WriteLine($"Conta Adicionada {item.Conta} com o saldo de {item.Saldo}");
         _itens[_proximaPosicao] = item;
         _proximaPosicao++;
     }
@@ -24,7 +25,7 @@ public class listaDeContasCorrentes
     {
         if(_itens.Length >= tamanhoNecessario) return;
 
-        System.Console.WriteLine("Aumentando a capacidade do Array");
+        Console.WriteLine("Aumentando a capacidade do Array");
 
         ContaCorrente[] novoArray = new ContaCorrente[tamanhoNecessario];
         for (int i = 0; i < _itens.Length; i++)
@@ -37,9 +38,14 @@ public class listaDeContasCorrentes
 
     public ContaCorrente MaiorSaldo()
     {
-        for (int i = 0; i < _itens; i++)
+        int indiceMaiorSaldo = 0;
+
+        for (int i = 0; i < _itens.Length; i++)
         {
-            
+            if (_itens[indiceMaiorSaldo].Saldo < _itens[i].Saldo) indiceMaiorSaldo = i;
+
         }
+
+        return _itens[indiceMaiorSaldo];
     }
 }
