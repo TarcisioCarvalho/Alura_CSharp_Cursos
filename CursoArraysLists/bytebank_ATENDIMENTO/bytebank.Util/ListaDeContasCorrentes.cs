@@ -34,4 +34,12 @@ public class listaDeContasCorrentes
 
         _itens = novoArray;
     }
+
+    public ContaCorrente MaiorSaldo()
+    {
+        for (int i = 0; i < _itens; i++)
+        {
+            
+        }
+    }
 }

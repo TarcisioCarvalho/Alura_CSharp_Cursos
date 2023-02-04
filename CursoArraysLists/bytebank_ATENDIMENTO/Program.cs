@@ -21,9 +21,6 @@ void testaArrayContaCorrente()
      listaDeContas.Adicionar( new ContaCorrente(487,"5679787-J"));
     listaDeContas.Adicionar( new ContaCorrente(487,"5679787-L"));
     listaDeContas.Adicionar( new ContaCorrente(487,"5679787-N"));
-    
-
-    
 }
 
 testaArrayContaCorrente();
