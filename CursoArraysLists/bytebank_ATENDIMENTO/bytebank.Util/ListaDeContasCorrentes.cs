@@ -48,4 +48,9 @@ public class listaDeContasCorrentes
 
         return _itens[indiceMaiorSaldo];
     }
+
+    public void RemoverConta()
+    {
+        
+    }
 }
