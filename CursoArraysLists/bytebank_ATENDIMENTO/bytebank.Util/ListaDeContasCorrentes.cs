@@ -49,8 +49,32 @@ public class listaDeContasCorrentes
         return _itens[indiceMaiorSaldo];
     }
 
-    public void RemoverConta()
+    public void RemoverConta(ContaCorrente conta)
     {
+        int indiceContaRemover = 0;
+        for (int i = 0; i < _itens.Length; i++)
+        {
+            if(conta == _itens[i]) break;
+            indiceContaRemover++;
+        }
+
+        ContaCorrente[] novoArray = new ContaCorrente[_itens.Length - 1];
+        for (int i = 0; i < novoArray.Length; i++)
+        {
+            if(i == indiceContaRemover) break;
+            novoArray[i] = _itens[i];
+        }
+        for (int i = indiceContaRemover; i < novoArray.Length; i++)
+        {
+            novoArray[i] = _itens[i+1];
+        }
+        System.Console.WriteLine($"Conta com número de {_itens[indiceContaRemover].Conta} Removida");
+        _itens = novoArray;
         
+    }
+
+    public ContaCorrente[] Contas()
+    {
+        return _itens;
     }
 }

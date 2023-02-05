@@ -10,8 +10,8 @@ void testaArrayContaCorrente()
     ContaCorrente ContamaiorSaldo;
 
     listaDeContasCorrentes listaDeContas = new listaDeContasCorrentes();
-    
-    listaDeContas.Adicionar( new ContaCorrente(487,"5679787-A",100));
+    ContaCorrente contaA = new ContaCorrente(487,"5679787-A",100);
+    listaDeContas.Adicionar(contaA);
     listaDeContas.Adicionar( new ContaCorrente(487,"5679787-B",150));
     listaDeContas.Adicionar( new ContaCorrente(487,"5679787-C",100));
     listaDeContas.Adicionar( new ContaCorrente(487,"5679787-D",50));
@@ -19,13 +19,20 @@ void testaArrayContaCorrente()
     listaDeContas.Adicionar( new ContaCorrente(487,"5679787-F", 1000));
     listaDeContas.Adicionar( new ContaCorrente(487,"5679787-G", 10000));
     listaDeContas.Adicionar( new ContaCorrente(487,"5679787-H", 2000));
-    listaDeContas.Adicionar( new ContaCorrente(487,"5679787-I", 150));
+    ContaCorrente contaI = new ContaCorrente(487,"5679787-I", 150);
+    listaDeContas.Adicionar( contaI );
     listaDeContas.Adicionar( new ContaCorrente(487,"5679787-J",200));
     listaDeContas.Adicionar( new ContaCorrente(487,"5679787-L",300));
     listaDeContas.Adicionar( new ContaCorrente(487,"5679787-N",400));
 
     ContamaiorSaldo = listaDeContas.MaiorSaldo();
     Console.WriteLine($"A conta de maior saldo é {ContamaiorSaldo.Conta} com Saldo de {ContamaiorSaldo.Saldo}");
+    listaDeContas.RemoverConta(contaA);
+    listaDeContas.RemoverConta(contaI);
+   foreach (var conta in listaDeContas.Contas())
+   {
+        System.Console.WriteLine($"{conta.Conta}");
+   }
 }
 
 testaArrayContaCorrente();
