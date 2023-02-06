@@ -7,7 +7,7 @@ Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
 
 void testaArrayContaCorrente()
 {
-    ContaCorrente ContamaiorSaldo;
+    ContaCorrente ContaMaiorSaldo;
 
     listaDeContasCorrentes listaDeContas = new listaDeContasCorrentes();
     ContaCorrente contaA = new ContaCorrente(487,"5679787-A",100);
@@ -24,15 +24,13 @@ void testaArrayContaCorrente()
     listaDeContas.Adicionar( new ContaCorrente(487,"5679787-J",200));
     listaDeContas.Adicionar( new ContaCorrente(487,"5679787-L",300));
     listaDeContas.Adicionar( new ContaCorrente(487,"5679787-N",400));
-
-    ContamaiorSaldo = listaDeContas.MaiorSaldo();
-    Console.WriteLine($"A conta de maior saldo é {ContamaiorSaldo.Conta} com Saldo de {ContamaiorSaldo.Saldo}");
+    listaDeContas.ExibeLista();
+    ContaMaiorSaldo = listaDeContas.MaiorSaldo();
+    Console.WriteLine($"A conta de maior saldo é {ContaMaiorSaldo.Conta} com Saldo de {ContaMaiorSaldo.Saldo}");
     listaDeContas.RemoverConta(contaA);
+    listaDeContas.ExibeLista();
     listaDeContas.RemoverConta(contaI);
-   foreach (var conta in listaDeContas.Contas())
-   {
-        System.Console.WriteLine($"{conta.Conta}");
-   }
+    listaDeContas.ExibeLista();
 }
 
 testaArrayContaCorrente();

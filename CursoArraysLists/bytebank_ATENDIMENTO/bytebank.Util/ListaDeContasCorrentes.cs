@@ -73,8 +73,11 @@ public class listaDeContasCorrentes
         
     }
 
-    public ContaCorrente[] Contas()
+    public void ExibeLista()
     {
-        return _itens;
+        foreach (ContaCorrente conta in _itens)
+        {
+            System.Console.WriteLine($"Conta de número: {conta.Conta} Agência: {conta.Numero_agencia} e Saldo: {conta.Saldo} ");
+        }
     }
 }
