@@ -27,10 +27,12 @@ void testaArrayContaCorrente()
     listaDeContas.ExibeLista();
     ContaMaiorSaldo = listaDeContas.MaiorSaldo();
     Console.WriteLine($"A conta de maior saldo é {ContaMaiorSaldo.Conta} com Saldo de {ContaMaiorSaldo.Saldo}");
-    listaDeContas.RemoverConta(contaA);
-    listaDeContas.ExibeLista();
-    listaDeContas.RemoverConta(contaI);
-    listaDeContas.ExibeLista();
+    
+    for (int i = 0; i < listaDeContas.Tamanho; i++)
+    {
+        ContaCorrente conta = listaDeContas[i];
+        System.Console.WriteLine($" A Conta {conta.Conta} no indice {i}");
+    }
 }
 
 testaArrayContaCorrente();

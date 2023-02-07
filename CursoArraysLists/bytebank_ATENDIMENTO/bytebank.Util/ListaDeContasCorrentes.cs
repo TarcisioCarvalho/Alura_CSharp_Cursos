@@ -7,6 +7,11 @@ public class listaDeContasCorrentes
     private ContaCorrente[] _itens= null;
     private int _proximaPosicao = 0;
 
+    public int Tamanho { get
+    {
+        return _itens.Length;
+    } }
+
     public listaDeContasCorrentes(int inicial = 5)
     {
         _itens = new ContaCorrente[inicial];
@@ -80,4 +85,22 @@ public class listaDeContasCorrentes
             System.Console.WriteLine($"Conta de número: {conta.Conta} Agência: {conta.Numero_agencia} e Saldo: {conta.Saldo} ");
         }
     }
+
+    public ContaCorrente RecuperaIndiceItem(int indice)
+    {
+        if(indice < 0 || indice > _itens.Length) throw new ArgumentException(nameof(indice));
+
+        return _itens[indice];
+    }
+
+    public ContaCorrente this[int indice]
+    {
+        get
+        {
+            return RecuperaIndiceItem(indice);
+        }
+    }
+
+    
+
 }
