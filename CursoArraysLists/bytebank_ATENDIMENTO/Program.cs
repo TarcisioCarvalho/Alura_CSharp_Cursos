@@ -1,10 +1,97 @@
-﻿using bytebank.Modelos.Conta;
+﻿using System.Collections;
+using bytebank.Modelos.Conta;
 using bytebank.Util;
 
 Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
 
+void AtendimentoCliente()
+{
+    ArrayList listaContas = new ArrayList();
+    char opcao = '0';
+    while (opcao != '6')
+    {
+        Console.Clear();
+        Console.WriteLine("===============================");
+        Console.WriteLine("===       Atendimento       ===");
+        Console.WriteLine("===1 - Cadastrar Conta      ===");
+        Console.WriteLine("===2 - Listar Contas        ===");
+        Console.WriteLine("===3 - Remover Conta        ===");
+        Console.WriteLine("===4 - Ordenar Contas       ===");
+        Console.WriteLine("===5 - Pesquisar Conta      ===");
+        Console.WriteLine("===6 - Sair do Sistema      ===");
+        Console.WriteLine("===============================");
+        Console.WriteLine("\n\n");
+        Console.Write("Digite a opção desejada: ");
+        opcao = Console.ReadLine()[0];
+        switch (opcao)
+        {
+            case '1':
+                CadastrarConta();
+                break;
+             case '2':
+                ListarConta();
+                break;
+              case '6':
+                System.Console.WriteLine("Finalizando Sistema........");;
+                break;
+            default:
+                Console.WriteLine("Opcao não implementada.");
+                break;
+        }
+    }
+     void CadastrarConta()
+    {
+    Console.Clear();
+    Console.WriteLine("===============================");
+    Console.WriteLine("===   CADASTRO DE CONTAS    ===");
+    Console.WriteLine("===============================");
+    Console.WriteLine("\n");
+    Console.WriteLine("=== Informe dados da conta ===");
+    Console.Write("Número da conta: ");
+    string numeroConta = Console.ReadLine();
+
+    Console.Write("Número da Agência: ");
+    int numeroAgencia = int.Parse(Console.ReadLine());
+
+    ContaCorrente conta = new ContaCorrente(numeroAgencia, numeroConta);
+
+    Console.Write("Informe o saldo inicial: ");
+    conta.Saldo = double.Parse(Console.ReadLine());
+
+    Console.Write("Infome nome do Titular: ");
+    conta.Titular.Nome = Console.ReadLine();
+
+    Console.Write("Infome CPF do Titular: ");
+    conta.Titular.Cpf = Console.ReadLine();
+
+    Console.Write("Infome Profissão do Titular: ");
+    conta.Titular.Profissao = Console.ReadLine();
+
+    listaContas.Add(conta);
+    Console.WriteLine("... Conta cadastrada com sucesso! ...");
+    Console.ReadKey();
+    }
+    void ListarConta()
+    {
+        
+   foreach (ContaCorrente conta in listaContas)
+   {
+     System.Console.WriteLine($"Conta: {conta.Conta}");
+     System.Console.WriteLine($"Agência: {conta.Numero_agencia}");
+     System.Console.WriteLine($"Nome Titular: {conta.Titular.Nome}");
+     Console.ReadKey();
+   }
+    }
+}
 
 
+
+AtendimentoCliente();
+
+
+
+
+#region ExemplosArrayC#
 void testaArrayContaCorrente()
 {
     ContaCorrente ContaMaiorSaldo;
@@ -34,8 +121,9 @@ void testaArrayContaCorrente()
         System.Console.WriteLine($" A Conta {conta.Conta} no indice {i}");
     }
 }
+#endregion
 
-testaArrayContaCorrente();
+//testaArrayContaCorrente();
 
 
 /* using bytebank.Modelos.Conta;

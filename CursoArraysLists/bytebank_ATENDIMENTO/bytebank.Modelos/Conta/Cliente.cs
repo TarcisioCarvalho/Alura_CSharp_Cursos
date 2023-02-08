@@ -17,7 +17,9 @@
                 if (value.Length < 3)
                 {
                     Console.WriteLine("Nome do titular precisa ter pelo menos 3 caracteres.");
+                    return;
                 }
+                _nome = value;
              }
 
         }
