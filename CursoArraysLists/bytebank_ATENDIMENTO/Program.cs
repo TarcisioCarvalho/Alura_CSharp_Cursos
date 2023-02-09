@@ -6,7 +6,7 @@ Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
 
 void AtendimentoCliente()
 {
-    ArrayList listaContas = new ArrayList();
+    List<ContaCorrente> listaContas = new List<ContaCorrente>();
     char opcao = '0';
     while (opcao != '6')
     {
@@ -73,14 +73,19 @@ void AtendimentoCliente()
     }
     void ListarConta()
     {
-        
-   foreach (ContaCorrente conta in listaContas)
-   {
-     System.Console.WriteLine($"Conta: {conta.Conta}");
-     System.Console.WriteLine($"Agência: {conta.Numero_agencia}");
-     System.Console.WriteLine($"Nome Titular: {conta.Titular.Nome}");
-     Console.ReadKey();
-   }
+        if(listaContas.Count <= 0)
+        {
+            System.Console.WriteLine("Não há contas cadastradas");
+            Console.ReadKey();
+            return;
+        }
+        foreach (var conta in listaContas)
+        {
+            System.Console.WriteLine($"Conta: {conta.Conta}");
+            System.Console.WriteLine($"Agência: {conta.Numero_agencia}");
+            System.Console.WriteLine($"Nome Titular: {conta.Titular.Nome}");
+            Console.ReadKey();
+        }
     }
 }
 
