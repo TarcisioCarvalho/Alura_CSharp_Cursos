@@ -4,6 +4,49 @@ using bytebank.Util;
 
 Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
 
+
+
+
+void Desafio()
+{
+    List<string> nomesDosEscolhidos = new List<string>()
+    {
+        "Bruce Wayne",
+        "Carlos Vilagran",
+        "Richard Grayson",
+        "Bob Kane",
+        "Will Farrel",
+        "Lois Lane",
+        "General Welling",
+        "Perla Letícia",
+        "Uxas",
+        "Diana Prince",
+        "Elisabeth Romanova",
+        "Anakin Wayne"
+    };
+    bool EncontraParametroNaLista<T>(List<T> lista,T parametro)
+    {
+        foreach (var item in lista)
+        {
+            if(item.Equals(parametro)) return true;
+        }
+        return false;
+    }
+
+    if(EncontraParametroNaLista<string>(nomesDosEscolhidos,"Anakin Wayne"))
+    {
+        System.Console.WriteLine("Nome encontrado!");
+    }
+    if(!EncontraParametroNaLista<string>(nomesDosEscolhidos,"Anakin"))
+    {
+        System.Console.WriteLine("Nome não encontrado!");
+    }
+    
+    
+}
+
+Desafio();
+
 void AtendimentoCliente()
 {
     List<ContaCorrente> listaContas = new List<ContaCorrente>();
@@ -91,7 +134,8 @@ void AtendimentoCliente()
 
 
 
-AtendimentoCliente();
+//AtendimentoCliente();
+
 
 
 
