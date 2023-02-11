@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using bytebank.Exceptions;
 using bytebank.Modelos.Conta;
 using bytebank.Util;
 
@@ -6,8 +7,8 @@ Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
 
 
 
-
-void Desafio()
+#region Desafio
+/* void Desafio()
 {
     List<string> nomesDosEscolhidos = new List<string>()
     {
@@ -45,43 +46,66 @@ void Desafio()
     
 }
 
-Desafio();
+Desafio(); */
+#endregion
 
 void AtendimentoCliente()
 {
     List<ContaCorrente> listaContas = new List<ContaCorrente>();
     char opcao = '0';
-    while (opcao != '6')
+    try
     {
-        Console.Clear();
-        Console.WriteLine("===============================");
-        Console.WriteLine("===       Atendimento       ===");
-        Console.WriteLine("===1 - Cadastrar Conta      ===");
-        Console.WriteLine("===2 - Listar Contas        ===");
-        Console.WriteLine("===3 - Remover Conta        ===");
-        Console.WriteLine("===4 - Ordenar Contas       ===");
-        Console.WriteLine("===5 - Pesquisar Conta      ===");
-        Console.WriteLine("===6 - Sair do Sistema      ===");
-        Console.WriteLine("===============================");
-        Console.WriteLine("\n\n");
-        Console.Write("Digite a opção desejada: ");
-        opcao = Console.ReadLine()[0];
-        switch (opcao)
+        while (opcao != '6')
         {
-            case '1':
-                CadastrarConta();
-                break;
-             case '2':
-                ListarConta();
-                break;
-              case '6':
-                System.Console.WriteLine("Finalizando Sistema........");;
-                break;
-            default:
-                Console.WriteLine("Opcao não implementada.");
-                break;
+            Console.Clear();
+            Console.WriteLine("===============================");
+            Console.WriteLine("===       Atendimento       ===");
+            Console.WriteLine("===1 - Cadastrar Conta      ===");
+            Console.WriteLine("===2 - Listar Contas        ===");
+            Console.WriteLine("===3 - Remover Conta        ===");
+            Console.WriteLine("===4 - Ordenar Contas       ===");
+            Console.WriteLine("===5 - Pesquisar Conta      ===");
+            Console.WriteLine("===6 - Sair do Sistema      ===");
+            Console.WriteLine("===============================");
+            Console.WriteLine("\n\n");
+            Console.Write("Digite a opção desejada: ");
+            try
+            {
+                opcao = Console.ReadLine()[0];
+            }
+            catch (System.Exception ex)
+            {
+                
+                throw new ByteBankException(ex.Message);
+            }
+            
+            switch (opcao)
+            {
+                case '1':
+                    CadastrarConta();
+                    break;
+                case '2':
+                    ListarConta();
+                    break;
+                case '6':
+                    System.Console.WriteLine("Finalizando Sistema........");;
+                    break;
+                default:
+                    Console.WriteLine("Opcao não implementada.");
+                    break;
+            }
         }
     }
+    catch(ByteBankException byteBankException)
+    {
+        System.Console.WriteLine($"{byteBankException.Message}");
+    }
+    catch (System.Exception)
+    {
+        
+        throw;
+    }
+    
      void CadastrarConta()
     {
     Console.Clear();
@@ -134,7 +158,7 @@ void AtendimentoCliente()
 
 
 
-//AtendimentoCliente();
+AtendimentoCliente();
 
 
 
