@@ -87,6 +87,9 @@ void AtendimentoCliente()
                 case '2':
                     ListarConta();
                     break;
+                case '3':
+                    RemoverConta();
+                    break;
                 case '6':
                     System.Console.WriteLine("Finalizando Sistema........");;
                     break;
@@ -100,10 +103,10 @@ void AtendimentoCliente()
     {
         System.Console.WriteLine($"{byteBankException.Message}");
     }
-    catch (System.Exception)
+    catch (System.Exception ex)
     {
         
-        throw;
+        System.Console.WriteLine($"{ex.Message}");
     }
     
      void CadastrarConta()
@@ -153,6 +156,38 @@ void AtendimentoCliente()
             System.Console.WriteLine($"Nome Titular: {conta.Titular.Nome}");
             Console.ReadKey();
         }
+    }
+    void RemoverConta()
+    {
+        Console.Clear();
+        Console.WriteLine("===============================");
+        Console.WriteLine("===   CADASTRO DE CONTAS    ===");
+        Console.WriteLine("===============================");
+        Console.WriteLine("\n");
+        Console.WriteLine("=== Informe dados da conta ===");
+        Console.Write("Número da conta: ");
+        string numeroConta = Console.ReadLine();
+
+        ContaCorrente contaCorrente = null;
+
+        foreach (var conta in listaContas)
+        {
+            if(conta.Conta.Equals(numeroConta))
+            {
+                 contaCorrente = conta;
+            }
+        }
+
+        if(contaCorrente != null)
+        {
+             listaContas.Remove(contaCorrente);
+             System.Console.WriteLine("Conta Removida com sucesso");
+        }
+
+        if(contaCorrente == null) System.Console.WriteLine("Conta Não Encotrada");
+        
+        Console.ReadKey();
+        
     }
 }
 
