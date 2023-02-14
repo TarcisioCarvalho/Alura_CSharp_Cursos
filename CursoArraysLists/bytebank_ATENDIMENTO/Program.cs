@@ -51,7 +51,12 @@ Desafio(); */
 
 void AtendimentoCliente()
 {
-    List<ContaCorrente> listaContas = new List<ContaCorrente>();
+    List<ContaCorrente> listaContas = new List<ContaCorrente>()
+    {
+        new ContaCorrente(323,"5679787-A"){Saldo = 200, Titular = new Cliente(){Cpf="00011122232",Nome="Josiane",Profissao="Dev"}},
+        new ContaCorrente(322,"5679787-B"){Saldo = 300, Titular = new Cliente(){Cpf="00021122232",Nome="Jaja",Profissao="Dev"}},
+        new ContaCorrente(321,"5679787-C"){Saldo = 400, Titular = new Cliente(){Cpf="00031122232",Nome="sebastian",Profissao="Dev"}}
+    };
     char opcao = '0';
     try
     {
@@ -90,6 +95,9 @@ void AtendimentoCliente()
                 case '3':
                     RemoverConta();
                     break;
+                 case '4':
+                    OrdenarConta();
+                    break;
                 case '6':
                     System.Console.WriteLine("Finalizando Sistema........");;
                     break;
@@ -107,6 +115,13 @@ void AtendimentoCliente()
     {
         
         System.Console.WriteLine($"{ex.Message}");
+    }
+
+    void OrdenarConta()
+    {
+        listaContas.Sort();
+        System.Console.WriteLine("Contas ordenadas");
+        Console.ReadKey();
     }
     
      void CadastrarConta()
