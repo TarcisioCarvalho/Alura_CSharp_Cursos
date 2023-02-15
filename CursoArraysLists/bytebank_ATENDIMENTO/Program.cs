@@ -98,6 +98,9 @@ void AtendimentoCliente()
                  case '4':
                     OrdenarConta();
                     break;
+                case '5':
+                    PesquisarConta();
+                    break;
                 case '6':
                     System.Console.WriteLine("Finalizando Sistema........");;
                     break;
@@ -115,6 +118,41 @@ void AtendimentoCliente()
     {
         
         System.Console.WriteLine($"{ex.Message}");
+    }
+
+    void PesquisarConta()
+    {
+        System.Console.WriteLine("Se deseja pesquisar por número da conta digite  1  Se deseja pesquisar por cpf digite 2");
+        char opcao = Console.ReadLine()[0];
+        switch (opcao)
+        {
+            case '1' :
+                System.Console.Write("Digite o número da conta");
+                string numeroConta = Console.ReadLine();
+                var conta = PesquisaNumeroConta(numeroConta);
+                if(conta != null)
+                {
+                System.Console.WriteLine($"Conta encontrada");
+                System.Console.WriteLine(conta.ToString());
+                }
+                Console.ReadKey();
+                break;
+            case '2' :
+                System.Console.Write("Digite o número do cpf");
+                string cpf = Console.ReadLine();
+                //PesquisaNumeroCpf(cpf);
+                break;
+            default:
+                Console.WriteLine("Opcao não implementada.");
+                break;
+        }
+
+        ContaCorrente PesquisaNumeroConta(string numeroConta)
+        {
+            return listaContas
+            .Where(conta => conta.Conta == numeroConta)
+            .FirstOrDefault();
+        }
     }
 
     void OrdenarConta()
@@ -166,9 +204,10 @@ void AtendimentoCliente()
         }
         foreach (var conta in listaContas)
         {
-            System.Console.WriteLine($"Conta: {conta.Conta}");
+            /* System.Console.WriteLine($"Conta: {conta.Conta}");
             System.Console.WriteLine($"Agência: {conta.Numero_agencia}");
-            System.Console.WriteLine($"Nome Titular: {conta.Titular.Nome}");
+            System.Console.WriteLine($"Nome Titular: {conta.Titular.Nome}"); */
+            System.Console.WriteLine(conta.ToString());
             Console.ReadKey();
         }
     }
