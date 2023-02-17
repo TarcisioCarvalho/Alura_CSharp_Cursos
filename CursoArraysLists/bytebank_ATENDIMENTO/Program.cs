@@ -1,11 +1,13 @@
 ﻿using System.Collections;
+using bytebank.Atendimento;
 using bytebank.Exceptions;
 using bytebank.Modelos.Conta;
 using bytebank.Util;
 
 Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
 
-
+new ByteBankAtendimento()
+.AtendimentoCliente();
 
 #region Desafio
 /* void Desafio()
@@ -49,105 +51,7 @@ Console.WriteLine("Boas Vindas ao ByteBank, Atendimento.");
 Desafio(); */
 #endregion
 
-void AtendimentoCliente()
-{
-    
 
-    
-
-    void OrdenarConta()
-    {
-        listaContas.Sort();
-        System.Console.WriteLine("Contas ordenadas");
-        Console.ReadKey();
-    }
-    
-     void CadastrarConta()
-    {
-    Console.Clear();
-    Console.WriteLine("===============================");
-    Console.WriteLine("===   CADASTRO DE CONTAS    ===");
-    Console.WriteLine("===============================");
-    Console.WriteLine("\n");
-    Console.WriteLine("=== Informe dados da conta ===");
-    Console.Write("Número da conta: ");
-    string numeroConta = Console.ReadLine();
-
-    Console.Write("Número da Agência: ");
-    int numeroAgencia = int.Parse(Console.ReadLine());
-
-    ContaCorrente conta = new ContaCorrente(numeroAgencia, numeroConta);
-
-    Console.Write("Informe o saldo inicial: ");
-    conta.Saldo = double.Parse(Console.ReadLine());
-
-    Console.Write("Infome nome do Titular: ");
-    conta.Titular.Nome = Console.ReadLine();
-
-    Console.Write("Infome CPF do Titular: ");
-    conta.Titular.Cpf = Console.ReadLine();
-
-    Console.Write("Infome Profissão do Titular: ");
-    conta.Titular.Profissao = Console.ReadLine();
-
-    listaContas.Add(conta);
-    Console.WriteLine("... Conta cadastrada com sucesso! ...");
-    Console.ReadKey();
-    }
-    void ListarConta()
-    {
-        if(listaContas.Count <= 0)
-        {
-            System.Console.WriteLine("Não há contas cadastradas");
-            Console.ReadKey();
-            return;
-        }
-        foreach (var conta in listaContas)
-        {
-            /* System.Console.WriteLine($"Conta: {conta.Conta}");
-            System.Console.WriteLine($"Agência: {conta.Numero_agencia}");
-            System.Console.WriteLine($"Nome Titular: {conta.Titular.Nome}"); */
-            System.Console.WriteLine(conta.ToString());
-            Console.ReadKey();
-        }
-    }
-    void RemoverConta()
-    {
-        Console.Clear();
-        Console.WriteLine("===============================");
-        Console.WriteLine("===   CADASTRO DE CONTAS    ===");
-        Console.WriteLine("===============================");
-        Console.WriteLine("\n");
-        Console.WriteLine("=== Informe dados da conta ===");
-        Console.Write("Número da conta: ");
-        string numeroConta = Console.ReadLine();
-
-        ContaCorrente contaCorrente = null;
-
-        foreach (var conta in listaContas)
-        {
-            if(conta.Conta.Equals(numeroConta))
-            {
-                 contaCorrente = conta;
-            }
-        }
-
-        if(contaCorrente != null)
-        {
-             listaContas.Remove(contaCorrente);
-             System.Console.WriteLine("Conta Removida com sucesso");
-        }
-
-        if(contaCorrente == null) System.Console.WriteLine("Conta Não Encotrada");
-        
-        Console.ReadKey();
-        
-    }
-}
-
-
-
-AtendimentoCliente();
 
 
 

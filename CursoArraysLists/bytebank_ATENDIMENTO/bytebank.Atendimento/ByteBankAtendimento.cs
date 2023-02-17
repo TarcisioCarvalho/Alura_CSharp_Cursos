@@ -5,7 +5,7 @@ namespace bytebank.Atendimento;
 
 public class ByteBankAtendimento
 {
-     List<ContaCorrente> listaContas = new List<ContaCorrente>()
+    private List<ContaCorrente> listaContas = new List<ContaCorrente>()
         {
             new ContaCorrente(323,"5679787-A"){Saldo = 200, Titular = new Cliente(){Cpf="00011122232",Nome="Josiane",Profissao="Dev"}},
             new ContaCorrente(322,"5679787-B"){Saldo = 300, Titular = new Cliente(){Cpf="00021122232",Nome="Jaja",Profissao="Dev"}},
@@ -13,10 +13,7 @@ public class ByteBankAtendimento
         };
 
     public void AtendimentoCliente()
-    {
-
-    
-       
+    { 
         char opcao = '0';
         try
         {
@@ -114,5 +111,95 @@ public class ByteBankAtendimento
             .Where(conta => conta.Conta == numeroConta)
             .FirstOrDefault();
         }
+    }
+
+
+
+    void OrdenarConta()
+    {
+        listaContas.Sort();
+        System.Console.WriteLine("Contas ordenadas");
+        Console.ReadKey();
+    }
+    
+    public  void CadastrarConta()
+    {
+    Console.Clear();
+    Console.WriteLine("===============================");
+    Console.WriteLine("===   CADASTRO DE CONTAS    ===");
+    Console.WriteLine("===============================");
+    Console.WriteLine("\n");
+    Console.WriteLine("=== Informe dados da conta ===");
+    
+
+    Console.Write("Número da Agência: ");
+    int numeroAgencia = int.Parse(Console.ReadLine());
+
+    ContaCorrente conta = new ContaCorrente(numeroAgencia);
+    System.Console.WriteLine($"Nova conta [CONTA] : {conta.Conta}");
+    Console.Write("Informe o saldo inicial: ");
+    conta.Saldo = double.Parse(Console.ReadLine());
+
+    Console.Write("Infome nome do Titular: ");
+    conta.Titular.Nome = Console.ReadLine();
+
+    Console.Write("Infome CPF do Titular: ");
+    conta.Titular.Cpf = Console.ReadLine();
+
+    Console.Write("Infome Profissão do Titular: ");
+    conta.Titular.Profissao = Console.ReadLine();
+
+    listaContas.Add(conta);
+    Console.WriteLine("... Conta cadastrada com sucesso! ...");
+    Console.ReadKey();
+    }
+    public void ListarConta()
+    {
+        if(listaContas.Count <= 0)
+        {
+            System.Console.WriteLine("Não há contas cadastradas");
+            Console.ReadKey();
+            return;
+        }
+        foreach (var conta in listaContas)
+        {
+            /* System.Console.WriteLine($"Conta: {conta.Conta}");
+            System.Console.WriteLine($"Agência: {conta.Numero_agencia}");
+            System.Console.WriteLine($"Nome Titular: {conta.Titular.Nome}"); */
+            System.Console.WriteLine(conta.ToString());
+            Console.ReadKey();
+        }
+    }
+    public void RemoverConta()
+    {
+        Console.Clear();
+        Console.WriteLine("===============================");
+        Console.WriteLine("===   CADASTRO DE CONTAS    ===");
+        Console.WriteLine("===============================");
+        Console.WriteLine("\n");
+        Console.WriteLine("=== Informe dados da conta ===");
+        Console.Write("Número da conta: ");
+        string numeroConta = Console.ReadLine();
+
+        ContaCorrente contaCorrente = null;
+
+        foreach (var conta in listaContas)
+        {
+            if(conta.Conta.Equals(numeroConta))
+            {
+                 contaCorrente = conta;
+            }
+        }
+
+        if(contaCorrente != null)
+        {
+             listaContas.Remove(contaCorrente);
+             System.Console.WriteLine("Conta Removida com sucesso");
+        }
+
+        if(contaCorrente == null) System.Console.WriteLine("Conta Não Encotrada");
+        
+        Console.ReadKey();
+        
     }
 }

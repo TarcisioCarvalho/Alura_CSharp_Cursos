@@ -99,22 +99,16 @@
 		public ContaCorrente(int numero_agencia)
 		{
 			Numero_agencia = numero_agencia;
-			//Conta = Guid.NewGuid().ToString().Substring(0, 8);
+			Conta = Guid.NewGuid().ToString().Substring(0, 8);
 			Titular = new Cliente();
-			//TotalDeContasCriadas++;
+			TotalDeContasCriadas++;
 		}
 
-		public ContaCorrente(int numeroAgencia,string conta)
-		{
-			Numero_agencia = numeroAgencia;
-			Conta = conta;
-			Titular = new Cliente();
-		}
+	
 
-        public ContaCorrente(int numeroAgencia, string conta,double saldo)
+        public ContaCorrente(int numeroAgencia,double saldo)
         {
             Numero_agencia = numeroAgencia;
-            Conta = conta;
 			Saldo = saldo;
         }
 
