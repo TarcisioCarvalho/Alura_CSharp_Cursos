@@ -1,6 +1,7 @@
 using bytebank.Exceptions;
 using bytebank.Modelos.Conta;
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace bytebank.Atendimento;
 
@@ -98,6 +99,7 @@ public class ByteBankAtendimento
                 Console.ReadKey();
                 return;
             }
+            var xml = new XmlSerializer(typeof(List<ContaCorrente>));
             string Json = JsonConvert.SerializeObject(listaContas, Formatting.Indented);
         try
         {
