@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace exemplosMongoDB
@@ -24,8 +25,78 @@ namespace exemplosMongoDB
             assuntoArray.Add("Fantasia");
             doc.Add("Assunto", assuntoArray);
 
+            Livro livro = new Livro()
+            {
+                Titulo = "A Redoma",
+                Autor = "Stephen King",
+                Ano = 2012,
+                Paginas = 679,
+                Assuntos = new List<string>()
+                {
+                    "Ação",
+                    "Ficção Cientifíca",
+                    "Aventura"
+                }
+            };
+
+            Livro livro1 = new Livro()
+            {
+                Titulo = "Star Wars",
+                Autor = "Timoty",
+                Ano = 2010,
+                Paginas = 300,
+                Assuntos = new List<string>()
+                {
+                    "Ação",
+                    "Ficção Cientifica"
+                }
+                
+            };
+
+            //InsertOnMongoDB(livro1);
+            
+            List<Livro> livros = new List<Livro>();
+            livros.Add(new Livro("A Dança com os Dragões", "George R R Martin", 2011, 934, "Fantasia, Ação"));
+            //livros.Add(new Livro("Star Trek Portal do Tempo", "Crispin A C", 2002, 321, "Fantasia, Ação"));
+            //livros.Add(new Livro("Star Trek Enigmas", "Dedopolus Tim", 2006, 195, "Ficção Científica, Ação"));
+            //livros.Add(new Livro("Emília no Pais da Gramática", "Monteiro Lobato", 1936, 230, "Infantil, Literatura Brasileira, Didático"));
+            //livros.Add(new Livro("Chapelzinho Amarelo", "Chico Buarque", 2008, 123, "Infantil, Literatura Brasileira"));
+            //livros.Add(new Livro("20000 Léguas Submarinas", "Julio Verne", 1894, 256, "Ficção Científica, Ação"));
+            //livros.Add(new Livro("Primeiros Passos na Matemática", "Mantin Ibanez", 2014, 190, "Didático, Infantil"));
+            //livros.Add(new Livro("Saúde e Sabor", "Yeomans Matthew", 2012, 245, "Culinária, Didático"));
+            //livros.Add(new Livro("Goldfinger", "Iam Fleming", 1956, 267, "Espionagem, Ação"));
+            //livros.Add(new Livro("Da Rússia com Amor", "Iam Fleming", 1966, 245, "Espionagem, Ação"));
+            //livros.Add(new Livro("O Senhor dos Aneis", "J R R Token", 1948, 1956, "Fantasia, Ação"));
+
+            var T = InsertMultOnMongoDB(livros);
+        }
+        static async Task InsertOnMongoDB(Livro livro)
+        {
             AcessandoMongoDB acessandoMongoDB = new AcessandoMongoDB();
-            acessandoMongoDB.InsertOnMongoDB(doc);
+            await acessandoMongoDB.Livros.InsertOneAsync(livro);
+            Console.WriteLine("Documento Incluido!");
+            Console.ReadLine();
+        }
+        static async Task InsertMultOnMongoDB(List<Livro> livros)
+        {
+            AcessandoMongoDB acessandoMongoDB = new AcessandoMongoDB();
+            try
+            {
+                List<Livro> livrosTeste = new List<Livro>()
+                {
+                    new Livro(){Titulo = "Teste1",Autor = "AutorTeste"}
+                };
+                await acessandoMongoDB.Livros.InsertManyAsync(livrosTeste);
+                Console.WriteLine("Documentos Incluidos!");
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.ReadLine();
+                throw;
+            }
+        
         }
     }
 }
