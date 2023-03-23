@@ -71,7 +71,8 @@ namespace exemplosMongoDB
             livros.Add(new Livro("O Senhor dos Aneis", "J R R Token", 1948, 1956, "Fantasia, Ação"));
 
             // var T = InsertMultOnMongoDB(livros);
-            SearchOnMongo();
+            // SearchOnMongo();
+            SearchOnMongoFilter("George R R Martin");
         }
         static async Task InsertOnMongoDB(Livro livro)
         {
@@ -93,6 +94,20 @@ namespace exemplosMongoDB
             AcessandoMongoDB acessandoMongoDB = new AcessandoMongoDB();
             var listaLivros = acessandoMongoDB.Livros.Find(new BsonDocument()).ToList();
 
+            listaLivros.ForEach(livro =>
+            {
+                Console.WriteLine(livro.ToJson<Livro>());
+            });
+        }
+
+        static void SearchOnMongoFilter(string filter)
+        {
+            AcessandoMongoDB acessandoMongoDB = new AcessandoMongoDB();
+            var filtro = new BsonDocument()
+            {
+                { "Autor",filter }
+            };
+            var listaLivros = acessandoMongoDB.Livros.Find(filtro).ToList();
             listaLivros.ForEach(livro =>
             {
                 Console.WriteLine(livro.ToJson<Livro>());
