@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,7 +73,8 @@ namespace exemplosMongoDB
 
             // var T = InsertMultOnMongoDB(livros);
             // SearchOnMongo();
-            SearchOnMongoFilter("George R R Martin");
+            // SearchOnMongoFilter("George R R Martin");
+            SearchOnMongoConditions();
         }
         static async Task InsertOnMongoDB(Livro livro)
         {
@@ -108,6 +110,17 @@ namespace exemplosMongoDB
                 { "Autor",filter }
             };
             var listaLivros = acessandoMongoDB.Livros.Find(filtro).ToList();
+            listaLivros.ForEach(livro =>
+            {
+                Console.WriteLine(livro.ToJson<Livro>());
+            });
+        }
+
+        static void SearchOnMongoConditions()
+        {
+            AcessandoMongoDB acessandoMongoDB = new AcessandoMongoDB();
+            var listaLivros = acessandoMongoDB.Livros
+                .Find(livro => livro.Assuntos.Contains(" Ação")).SortByDescending(livro => livro.Paginas).ToList();
             listaLivros.ForEach(livro =>
             {
                 Console.WriteLine(livro.ToJson<Livro>());
