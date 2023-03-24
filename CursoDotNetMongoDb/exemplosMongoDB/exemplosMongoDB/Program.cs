@@ -70,11 +70,15 @@ namespace exemplosMongoDB
             livros.Add(new Livro("Goldfinger", "Iam Fleming", 1956, 267, "Espionagem, Ação"));
             livros.Add(new Livro("Da Rússia com Amor", "Iam Fleming", 1966, 245, "Espionagem, Ação"));
             livros.Add(new Livro("O Senhor dos Aneis", "J R R Token", 1948, 1956, "Fantasia, Ação"));
-
+            string titulo = "A Dança com os Dragões";
             // var T = InsertMultOnMongoDB(livros);
             // SearchOnMongo();
             // SearchOnMongoFilter("George R R Martin");
-            SearchOnMongoConditions();
+            SearchOnMongoConditions(titulo);
+            //ChangePropretiesOnMongo(titulo);
+            //UpdateOnMongo(titulo);
+            DeleteOnMongo(titulo);
+            SearchOnMongoConditions(titulo);
         }
         static async Task InsertOnMongoDB(Livro livro)
         {
@@ -116,15 +120,44 @@ namespace exemplosMongoDB
             });
         }
 
-        static void SearchOnMongoConditions()
+        static void SearchOnMongoConditions(string titulo)
         {
             AcessandoMongoDB acessandoMongoDB = new AcessandoMongoDB();
             var listaLivros = acessandoMongoDB.Livros
-                .Find(livro => livro.Assuntos.Contains(" Ação")).SortByDescending(livro => livro.Paginas).ToList();
+                .Find(livro => livro.Titulo == titulo).ToList();
             listaLivros.ForEach(livro =>
             {
                 Console.WriteLine(livro.ToJson<Livro>());
             });
+            Console.WriteLine("Documentos Listados com Sucesso!");
+        }
+
+        static void ChangePropretiesOnMongo(string titulo)
+        {
+            AcessandoMongoDB acessandoMongoDB = new AcessandoMongoDB();
+            var livros = acessandoMongoDB.Livros.Find(livro => livro.Titulo == titulo).ToList();
+            
+            foreach (var livro in livros)
+            {
+                livro.Paginas = 936;
+                acessandoMongoDB.Livros.ReplaceOne(livro => livro.Titulo == titulo, livro);
+            }
+            Console.WriteLine("Documento Alterado Com Sucesso!");
+        }
+
+        static void UpdateOnMongo(string titulo)
+        {
+            var acessandoMongoDB = new AcessandoMongoDB();
+            var construtorAlteracao = Builders<Livro>.Update;
+            acessandoMongoDB.Livros.UpdateOne(livro => livro.Titulo == titulo, construtorAlteracao.Set(livr => livr.Paginas , 100));
+            Console.WriteLine("Documento Alterado Com Sucesso!");
+        }
+
+        static void DeleteOnMongo(string titulo)
+        {
+            var acessandoMongoDB = new AcessandoMongoDB();
+            acessandoMongoDB.Livros.DeleteMany(livro => livro.Titulo == titulo);
+            Console.WriteLine("Livro Excluido com sucesso!");
         }
 
         }

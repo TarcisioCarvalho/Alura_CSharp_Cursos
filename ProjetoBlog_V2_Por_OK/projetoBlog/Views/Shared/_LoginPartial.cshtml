@@ -1,0 +1,18 @@
+﻿@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Desconectar", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+
+    <ul class="nav navbar-nav navbar-right">
+        <li class="navbar-text">Olá @User.Identity.Name</li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Desconectar</a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Registrar", "Registrar", "Account")</li>
+        <li>@Html.ActionLink("Acessar", "Acessar", "Account")</li>
+    </ul>
+}
