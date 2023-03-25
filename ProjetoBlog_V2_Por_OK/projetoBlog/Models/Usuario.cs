@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,7 +9,9 @@ namespace projetoBlog.Models
 {
     public class Usuario
     {
-        // XXX TRABALHE AQUI
-        // Crie aqui a clase de usuários.
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+        public string Nome { get; set; }
+        public string Email { get; set; }
     }
 }

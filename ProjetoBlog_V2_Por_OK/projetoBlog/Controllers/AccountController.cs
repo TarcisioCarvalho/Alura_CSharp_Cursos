@@ -5,6 +5,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using MongoDB.Driver;
+using projetoBlog.Models;
 using projetoBlog.Models.Account;
 
 namespace projetoBlog.Controllers
@@ -34,24 +36,28 @@ namespace projetoBlog.Controllers
             // XXXX TRABALHE AQUI
             // Neste ponto iremos buscar o email digitado ao acessar o Blog
             // Descomentar as linhas abaixo
+            var constructor = Builders<Usuario>.Filter;
+            var condicao = constructor.Eq(usuario => usuario.Email, model.Email); 
+            var dbMongo = new AcessoMongoDB();
+            var user = await dbMongo.Usuarios.Find(condicao).SingleOrDefaultAsync();
 
-            //if (user == null)
-            //{
-            //    ModelState.AddModelError("Email", "Correio não foi registrado.");
-            //    return View(model);
-            //}
+            if (user == null)
+            {
+                ModelState.AddModelError("Email", "Correio não foi registrado.");
+                return View(model);
+            }
 
-            //var identity = new ClaimsIdentity(new[]
-            //    {
-            //        new Claim(ClaimTypes.Name, user.Nome),
-            //        new Claim(ClaimTypes.Email, user.Email)
-            //    },
-            //    "ApplicationCookie");
+            var identity = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, user.Nome),
+                    new Claim(ClaimTypes.Email, user.Email)
+                },
+                "ApplicationCookie");
 
-            //var context = Request.GetOwinContext();
-            //var authManager = context.Authentication;
+            var context = Request.GetOwinContext();
+            var authManager = context.Authentication;
 
-            //authManager.SignIn(identity);
+            authManager.SignIn(identity);
 
             return Redirect(GetRedirectUrl(model.RetornoUrl));
         }
@@ -79,9 +85,14 @@ namespace projetoBlog.Controllers
             {
                 return View(model);
             }
+            var usuario = new Usuario()
+            {
+                Nome = model.Nome,
+                Email = model.Email
+            };
 
-            // XXX TRABALHE AQUI
-            // Inclua o usuário na base de dados.
+            var db = new AcessoMongoDB();
+            await db.Usuarios.InsertOneAsync(usuario);
 
             return RedirectToAction("Index", "Home");
         }
