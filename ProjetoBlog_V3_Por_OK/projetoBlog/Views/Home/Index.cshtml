@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Página Inicial";
+}
+
+<div class="jumbotron">
+    <h1>Meu Blog .NET</h1>
+    <p class="lead">Exemplo de implementação de um BLOG.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <h2>Publicações Recentes</h2>
+        @foreach(var post in Model.PublicacoesRecentes)
+        {
+            <h4>@post.Titulo by @post.Autor on @post.DataCriacao</h4>
+            <p>@post.Conteudo.Substring(0, Math.Min(post.Conteudo.Length - 1, 100))</p>
+            <p><a class="btn btn-default btn-sm" href="@Url.Action("Publicacao", "Home", new { id = post.Id })">Visualizar &raquo;</a></p>
+        }
+    </div>
+    @*<div class="col-md-4">
+        Not finished.
+    </div>*@
+</div>

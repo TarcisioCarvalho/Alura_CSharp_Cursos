@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "Todas as Publicações";
+}
+@foreach (var publicacao in Model)
+{
+    <h2>@publicacao.Titulo by @publicacao.Autor on @publicacao.DataCriacao</h2>
+    <p>@publicacao.Conteudo.Substring(0, Math.Min(publicacao.Conteudo.Length - 1, 200))</p>
+    <p></p>
+    <p><a class="btn btn-default btn-sm" href="@Url.Action("Publicacao", "Home", new { id = publicacao.Id })">Visualizar &raquo;</a></p>
+}
